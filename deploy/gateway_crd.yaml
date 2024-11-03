@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+ name: nuwas-gateway
+ namespace: istio-system
+spec:
+ selector:
+  istio: ingressgateway
+ servers:
+ - port:
+     name: http
+     number: 80
+     protocol: HTTP
+   hosts:
+   - tt.nuwas.nn    
+ - port:
+     name: https
+     number: 443
+     protocol: HTTPS      
+   tls:
+    mode: SIMPLE
+    credentialName: global-istio-tls
+   hosts:
+   - tt.nuwas.nn
