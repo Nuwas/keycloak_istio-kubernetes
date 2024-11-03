@@ -1,0 +1,118 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak
+  namespace: jwt-keycloak  
+  labels:
+    app: keycloak
+spec:
+  selector:
+    app: keycloak
+  ports:
+    - protocol: "TCP"
+      port: 8080 
+      targetPort: 8080    
+  type: ClusterIP
+
+
+---
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+  namespace: jwt-keycloak  
+  labels:
+    app: keycloak
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+        - name: keycloak
+          #image: quay.io/keycloak/keycloak:23.0.6
+          image: quay.io/keycloak/keycloak:latest
+          args: ["start-dev"]
+          #image: quay.io/keycloak/keycloak:21.1.1
+          #args: ["start", "--cache-stack=kubernetes", "--spi-login-protocol-openid-connect-legacy-logout-redirect-uri=true"]
+          env:
+            - name: KEYCLOAK_ADMIN
+              value: "admin"
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: "admin"
+            - name: KC_PROXY
+              value: "edge"
+                #- name: jgroups.dns.query
+                #value: "keycloak"
+            - name: PROXY_ADDRESS_FORWARDING
+              value: "true"
+            - name: KC_HEALTH_ENABLED
+              value: "true"
+            - name: KC_METRICS_ENABLED
+              value: "true"
+            - name: KC_HTTP_ENABLED
+              value: "true"
+            - name: KC_HTTP_RELATIVE_PATH
+              value: "/keycloak"
+            - name: KC_HOSTNAME
+              value: "https://tt.nuwas.nn/keycloak"
+                #- name: KC_HOSTNAME_URL
+                #value: "https://tt.nuwas.nn/keycloak/auth/"
+                #- name: KC_HOSTNAME_ADMIN_URL
+                #value: "https://tt.nuwas.nn/keycloak/auth/"
+            - name: KC_DB
+              value: "postgres"
+            - name: POSTGRES_DB
+              value: "postgres-db" 
+            - name: KC_DB_URL
+              value: "jdbc:postgresql://postgres-db:5432/keycloak"
+            - name: KC_DB_URL_HOST
+              value: "postgres-db"
+            - name: KC_DB_URL_PORT
+              value: "5432"
+            - name: KC_DB_URL_DATABASE
+              value: "keycloak"
+            - name: KC_DB_USERNAME
+              value: "testuser"
+            - name: KC_DB_PASSWORD
+              value: "testpassword"
+
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: jgroups
+              containerPort: 7600
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: keycloak-vc
+  namespace: jwt-keycloak  
+spec:
+  hosts:
+  - tt.nuwas.nn 
+  gateways:
+  - istio-system/nuwas-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /keycloak
+    route:
+     - destination:
+        host: keycloak
+        port:
+          number: 8080  
+
+
+
+
