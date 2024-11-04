@@ -1,0 +1,18 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: jwt-nuwas-authz-policy
+  namespace: istio-system
+spec:
+  selector:
+    matchLabels:
+      istio: ingressgateway
+  rules:
+  - from:
+    - source:
+        requestPrincipals:
+        - https://tt.nuwas.nn/*
+    when:
+    - key: request.auth.claims[iss]
+      values:
+      - https://tt.nuwas.nn

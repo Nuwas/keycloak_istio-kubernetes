@@ -1,0 +1,14 @@
+apiVersion: security.istio.io/v1
+kind: RequestAuthentication
+metadata:
+  name: jwt-nuwas-req-auth
+  namespace: istio-system
+spec:
+  selector:
+    matchLabels:
+      istio: ingressgateway
+  jwtRules:
+  - forwardOriginalToken: true
+    issuer: https://tt.nuwas.nn
+    jwksUri: https://tt.nuwas.nn/keycloak/realms/test-realm/protocol/openid-connect/certs
+
