@@ -1,18 +1,22 @@
-apiVersion: security.istio.io/v1
+apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: jwt-nuwas-authz-policy
+  name: jwt-required-authz-policy
   namespace: istio-system
 spec:
   selector:
     matchLabels:
-      istio: ingressgateway
+      istio: ingressgateway  # Apply to the Gateway with this label
   rules:
   - from:
     - source:
-        requestPrincipals:
-        - https://tt.nuwas.nn/*
+       requestPrincipals: ["https://tt.nuwas.nn/keycloak/realms/nuwas-auth/*"]  # Its a combination of iss and sub "iss/sub", in this case subject is an uuid, so its better to keep it as *
+    to:
+    - operation:
+        paths:
+        - "/*"  # Applies to all paths except those specified in the allow-keycloak-path policy, Apply to all paths (can modify to restrict paths further)
     when:
-    - key: request.auth.claims[iss]
+    - key: request.auth.claims[iss]  # Check the 'iss' claim in JWT token
       values:
-      - https://tt.nuwas.nn
+      - "https://tt.nuwas.nn/keycloak/realms/nuwas-auth"  # Only allow requests where 'iss' claim is this value
+          

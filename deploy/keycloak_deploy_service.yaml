@@ -38,7 +38,6 @@ spec:
     spec:
       containers:
         - name: keycloak
-          #image: quay.io/keycloak/keycloak:23.0.6
           image: quay.io/keycloak/keycloak:latest
           args: ["start-dev"]
           #image: quay.io/keycloak/keycloak:21.1.1
@@ -50,8 +49,8 @@ spec:
               value: "admin"
             - name: KC_PROXY
               value: "edge"
-                #- name: jgroups.dns.query
-                #value: "keycloak"
+            - name: jgroups.dns.query
+              value: "keycloak"
             - name: PROXY_ADDRESS_FORWARDING
               value: "true"
             - name: KC_HEALTH_ENABLED

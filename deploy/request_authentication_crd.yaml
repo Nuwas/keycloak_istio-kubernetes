@@ -9,6 +9,5 @@ spec:
       istio: ingressgateway
   jwtRules:
   - forwardOriginalToken: true
-    issuer: https://tt.nuwas.nn
-    jwksUri: https://tt.nuwas.nn/keycloak/realms/test-realm/protocol/openid-connect/certs
-
+    issuer: https://tt.nuwas.nn/keycloak/realms/nuwas-auth
+    jwksUri: http://keycloak.jwt-keycloak.svc.cluster.local:8080/keycloak/realms/nuwas-auth/protocol/openid-connect/certs
