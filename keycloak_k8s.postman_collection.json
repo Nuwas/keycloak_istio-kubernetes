@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "52151ee4-f9ad-4472-a2fd-64349c3f108d",
+		"name": "keycloak_k8s",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9045370"
+	},
+	"item": [
+		{
+			"name": "local post Copy",
+			"request": {
+				"method": "POST",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "get yyyy-yyyy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"content\":\"Hello Izzy-11, How are you !!!!!\",\"messageId\":123456}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.0.205:8080/message",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"205"
+					],
+					"port": "8080",
+					"path": [
+						"message"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
