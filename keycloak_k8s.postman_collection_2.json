@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "52151ee4-f9ad-4472-a2fd-64349c3f108d",
+		"name": "keycloak_k8s",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9045370"
+	},
+	"item": [
+		{
+			"name": "local post Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "nuwas-rest-api",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "nuwas",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "nuwas",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://tt.nuwas.nn/keycloak/realms/nuwas-auth/protocol/openid-connect/token",
+					"protocol": "https",
+					"host": [
+						"tt",
+						"nuwas",
+						"nn"
+					],
+					"path": [
+						"keycloak",
+						"realms",
+						"nuwas-auth",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJfQjhRaThIY29TN1ZOYzhEd2RnWUdwbUVjZ2o4bGRLcE9Vc1JJS21jRlNBIn0.eyJleHAiOjE3MzEwMDcxNDUsImlhdCI6MTczMTAwNjg0NSwianRpIjoiOGQzZmZjMDUtMjRmYy00NTVmLTkxZjYtMjQxYzI1NzQ0MDY4IiwiaXNzIjoiaHR0cHM6Ly90dC5udXdhcy5ubi9rZXljbG9hay9yZWFsbXMvbnV3YXMtYXV0aCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI5ZWRmZTYwYi02OTJkLTRmZjktOGE3OC0wMjRmNTI3YWFiZjEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJudXdhcy1yZXN0LWFwaSIsInNpZCI6Ijk4NTc1MzJiLTNkZTctNDk3OS1iZTM4LTNlOWI1ZjZmMjFlYSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLW51d2FzLWF1dGgiLCJhZG1pbiIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsibnV3YXMtcmVzdC1hcGkiOnsicm9sZXMiOlsiY2xpZW50X2FkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJOdXdhcyBQb25uYW1iYXRoYXlpbCIsInByZWZlcnJlZF91c2VybmFtZSI6Im51d2FzIiwiZ2l2ZW5fbmFtZSI6Ik51d2FzIiwiZmFtaWx5X25hbWUiOiJQb25uYW1iYXRoYXlpbCIsImVtYWlsIjoicG51dmFzQGdtYWlsLmNvbSJ9.YzzGtAZFeyJapIrLH1hirvOPdoBaAe_Te43wMQH1ZqbkClO-hSRyxOb376Tt8shYK6EVayAwrw_wT0jsp_sZ2yYnbiamNOoNi8DmH-f877YBXKoz47_Vk8SsfgV4HjOObXAtpbj2mZV3WIsKr0Eb_VzE5vi59m37DSyYscqJNl21CDpbevUXE5Wc7weateFvuc_SuMioZjlqfnfPA64rlneJLzkpjPR1yMpF76-_khMU7aT8LvpbTvj_EOvStlTGW8wM3_XjNQEUzII55n8s94QZVIZQC30ZTNf36yG91DzUnCn7ZrEDUsW0NJpyMIzDV6SNux5fR2DvLslNyPhfmA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://tt.nuwas.nn/yyyy-yyyy/v1/message-y",
+					"protocol": "https",
+					"host": [
+						"tt",
+						"nuwas",
+						"nn"
+					],
+					"path": [
+						"yyyy-yyyy",
+						"v1",
+						"message-y"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
